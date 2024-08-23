@@ -18,8 +18,7 @@ function getHumanChoice(){
   return "not valid "
 }
 
-var humanScore = 0;
-var computerScore = 0;
+
 
 function playRound(humanChoice, computerChoice){
   switch (humanChoice) {
@@ -76,7 +75,18 @@ function playRound(humanChoice, computerChoice){
       break;
   }
 }
+var humanScore = 0;
+var computerScore = 0;
 
-let humanChoice = getHumanChoice();
-let computerChoice = getComputerChoice();
-playRound(humanChoice, computerChoice);
+function playGame() {
+
+  for (let index = 0; index < 5; index++) {
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+    console.log(`Player : ${humanScore}\nComputer : ${computerScore}\n`);
+    
+  }
+}
+
+playGame();
