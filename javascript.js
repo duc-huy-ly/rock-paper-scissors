@@ -21,5 +21,62 @@ function getHumanChoice(){
 var humanScore = 0;
 var computerScore = 0;
 
-let choice = getHumanChoice();
-alert("Player choice was " + choice);
+function playRound(humanChoice, computerChoice){
+  switch (humanChoice) {
+    case "rock":
+      switch (computerChoice) {
+        case "rock":
+          console.log("Draw")
+          break;
+        case "paper":
+          console.log("You lose ! Paper beats rock");
+          computerScore++;
+          break;
+        case "scissor":
+          console.log("You win! Rock beats scissor");
+          humanScore++;
+          break;
+        default:
+          break;
+      }
+      break;
+    case "paper":
+      switch (computerChoice) {
+        case "rock":
+          console.log("You win! Paper beats rock");
+          humanScore++;
+          break;
+        case "paper":
+          console.log("Draw");
+          break;
+        case "scissor":
+          console.log("You lose ! Scissor beats paper");
+          computerScore++;
+          break;
+        default:
+          break;
+      }
+      case "scissor":
+        switch (computerChoice) {
+          case "rock":
+            console.log("You lose ! Rock beats scissor");
+            computerScore++;
+            break;
+          case "paper":
+            console.log("You win ! Paper beats rock");
+            humanScore++
+            break;
+          case "scissor":
+            console.log("Draw");
+            break;
+          default:
+            break;
+        }
+    default:
+      break;
+  }
+}
+
+let humanChoice = getHumanChoice();
+let computerChoice = getComputerChoice();
+playRound(humanChoice, computerChoice);
