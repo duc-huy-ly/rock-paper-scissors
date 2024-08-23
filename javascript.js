@@ -8,4 +8,14 @@ function getComputerChoice(){
   }
 }
 
-alert(getComputerChoice());
+function getHumanChoice(){
+  var choice = prompt("rock, paper, scissor ?");
+  choice = choice.trim().toLowerCase();
+  if (choice == "rock" || choice == "paper" || choice == "scissor") {
+    return choice;
+  }
+  return "not valid "
+}
+
+let choice = getHumanChoice();
+alert("Player choice was " + choice);
