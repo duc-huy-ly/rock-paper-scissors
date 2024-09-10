@@ -1,38 +1,40 @@
+// Initialisation :
 
-function getComputerChoice(){
-  let x = Math.floor(Math.random()*10)%3;
-  switch(x){
-    case 0 : return "rock";
-    case 1 : return "paper";
-    case 2 : return "scissor";
+var humanScore = 0;
+var computerScore = 0;
+
+let humScoreSelector = document.querySelector("#humScore");
+let comScoreSelector = document.querySelector("#comScore");
+let message = document.querySelector("#result");
+let playerChoiceDiv = document.querySelector('#yourChoice');
+let computerChoiceDiv = document.querySelector('#computersChoice');
+
+function getComputerChoice() {
+  let randomNumber = Math.floor(Math.random() * 3);
+  switch (randomNumber) {
+    case 0: return "rock";
+    case 1: return "paper";
+    case 2: return "scissor";
   }
 }
 
-function getHumanChoice(){
-  var choice = prompt("rock, paper, scissor ?");
-  if (choice == null) return null;
-  choice = choice.trim().toLowerCase();
-  if (choice == "rock" || choice == "paper" || choice == "scissor") {
-    return choice;
-  }
-  return "not valid "
-}
-
-
-
-function playRound(humanChoice, computerChoice){
+function playRound(humanChoice, computerChoice) {
   switch (humanChoice) {
     case "rock":
+      playerChoiceDiv.textContent = "rock";
       switch (computerChoice) {
         case "rock":
-          console.log("Draw")
+          computerChoiceDiv.textContent = "rock";
+          message.textContent = "Draw"
           break;
         case "paper":
-          console.log("You lose ! Paper beats rock");
+          computerChoiceDiv.textContent = "paper";
+          message.textContent = "You lose !";
           computerScore++;
           break;
         case "scissor":
-          console.log("You win! Rock beats scissor");
+          computerChoiceDiv.textContent = "scissor";
+          message.textContent = "You win!";
           humanScore++;
           break;
         default:
@@ -40,53 +42,62 @@ function playRound(humanChoice, computerChoice){
       }
       break;
     case "paper":
+      playerChoiceDiv.textContent = "paper";
       switch (computerChoice) {
         case "rock":
-          console.log("You win! Paper beats rock");
+          computerChoiceDiv.textContent = "rock";
+          message.textContent = "You win!";
           humanScore++;
           break;
         case "paper":
-          console.log("Draw");
+          computerChoiceDiv.textContent = "paper";
+          message.textContent = "Draw";
           break;
         case "scissor":
-          console.log("You lose ! Scissor beats paper");
+          computerChoiceDiv.textContent = "scissor";
+          message.textContent = "You lose !";
           computerScore++;
           break;
         default:
           break;
       }
-      case "scissor":
-        switch (computerChoice) {
-          case "rock":
-            console.log("You lose ! Rock beats scissor");
-            computerScore++;
-            break;
-          case "paper":
-            console.log("You win ! Paper beats rock");
-            humanScore++
-            break;
-          case "scissor":
-            console.log("Draw");
-            break;
-          default:
-            break;
-        }
+      break;
+    case "scissor":
+      playerChoiceDiv.textContent = "scissor";
+      switch (computerChoice) {
+        case "rock":
+          computerChoiceDiv.textContent = "rock";
+          message.textContent = "You lose !";
+          computerScore++;
+          break;
+        case "paper":
+          computerChoiceDiv.textContent = "paper";
+          message.textContent = "You win !";
+          humanScore++
+          break;
+        case "scissor":
+          computerChoiceDiv.textContent = "scissor";
+          message.textContent = "Draw";
+          break;
+        default:
+          break;
+      }
     default:
       break;
   }
 }
-var humanScore = 0;
-var computerScore = 0;
 
-function playGame() {
-
-  for (let index = 0; index < 5; index++) {
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-    console.log(`Player : ${humanScore}\nComputer : ${computerScore}\n`);
-    
-  }
+function updateDisplay(){
+  humScoreSelector.textContent = humanScore;
+  comScoreSelector.textContent = computerScore;
 }
 
-playGame();
+let choices = document.querySelector('#choices');
+choices.addEventListener('click', (e) => {
+  let playerChoice = e.target.id;
+  let computerChoice = getComputerChoice();
+  playRound(playerChoice, computerChoice);
+  updateDisplay();
+})
+
+
